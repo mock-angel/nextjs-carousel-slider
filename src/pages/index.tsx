@@ -21,6 +21,12 @@ export default function Home() {
         <CarouselSliderItem />
         <CarouselSliderItem />
         <CarouselSliderItem />
+        <CarouselSliderItem />
+        <CarouselSliderItem />
+        <CarouselSliderItem />
+        <CarouselSliderItem />
+        <CarouselSliderItem />
+        <CarouselSliderItem />
       </div>
     </div>
   );
