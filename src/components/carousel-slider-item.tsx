@@ -1,5 +1,5 @@
 import { StarFavIcon } from "@/svgs/star-fav"
-import { ThreeDots } from "@/svgs/three-dots"
+import { ThreeDotsIcon } from "@/svgs/three-dots"
 import { CSSProperties } from "react"
 
 export const CarouselSliderItem = (props: { style: CSSProperties | undefined }) => {
@@ -18,7 +18,7 @@ export const CarouselSliderItem = (props: { style: CSSProperties | undefined }) 
                     <StarFavIcon style={{ width: "16px", height: "16px" }} />
                     <>4.3/5</>
                 </div>
-                <ThreeDots style={{ width: "16px", height: "16px" }} />
+                <ThreeDotsIcon style={{ width: "16px", height: "16px" }} />
             </div>
         </div>
     </>
