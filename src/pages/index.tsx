@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { CarouselSliderItem } from "@/components/carousel-slider-item";
-import { Ref, RefObject, useEffect, useRef, useState } from "react";
+import { Ref, RefObject, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { LeftArrowIcon } from "@/svgs/left-arrow";
 import { RightArrowIcon } from "@/svgs/right-arrow";
 
@@ -14,7 +14,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return size;
+}
+
 export default function Home() {
+  const size = useWindowSize();
   const [sliderWidth, setSliderWidth] = useState(0);
 
   const ref: RefObject<HTMLDivElement | null> = useRef<null | HTMLDivElement>(null);
@@ -33,7 +47,7 @@ export default function Home() {
   const carouselSliderItemWidth = (sliderWidth - (gaps * gapWidth)) / itemsToShow;
 
   const [itemAt, setItemAt] = useState(0);
-  const onScroll = (direction: "left" | "right") => {
+  const onScroll = (direction: "left" | "right" | "none") => {
     let scrollMultiplier = 0;
     if (direction == "left") scrollMultiplier = -1;
     if (direction == "right") scrollMultiplier = 1;
