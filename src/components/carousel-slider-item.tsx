@@ -3,7 +3,7 @@ import { ThreeDots } from "@/svgs/three-dots"
 
 export const CarouselSliderItem = () => {
     return <>
-        <div className="border flex-1 p-4 rounded-xl">
+        <div className="border flex-1 p-4 rounded-xl w-[300px]">
             <div className="h-[160px] bg-[#ffecec]  rounded-xl" />
             <div className="my-2">
                 Title in two lines just in case it's too long and we don't have space

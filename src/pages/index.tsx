@@ -16,17 +16,17 @@ export default function Home() {
     <div
       className={`${geistSans.variable} ${geistMono.variable} items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
     >
-      <div className="flex gap-4">
-        <CarouselSliderItem />
-        <CarouselSliderItem />
-        <CarouselSliderItem />
-        <CarouselSliderItem />
-        <CarouselSliderItem />
-        <CarouselSliderItem />
-        <CarouselSliderItem />
-        <CarouselSliderItem />
-        <CarouselSliderItem />
-        <CarouselSliderItem />
+      <div className="flex flex-row gap-4 overflow-y-auto">
+        <div><CarouselSliderItem /></div>
+        <div><CarouselSliderItem /></div>
+        <div><CarouselSliderItem /></div>
+        <div><CarouselSliderItem /></div>
+        <div><CarouselSliderItem /></div>
+        <div><CarouselSliderItem /></div>
+        <div><CarouselSliderItem /></div>
+        <div><CarouselSliderItem /></div>
+        <div><CarouselSliderItem /></div>
+        <div><CarouselSliderItem /></div>
       </div>
     </div>
   );
