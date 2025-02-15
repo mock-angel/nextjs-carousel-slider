@@ -14,29 +14,34 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-function useWindowSize() {
-  const [size, setSize] = useState([0, 0]);
-  useLayoutEffect(() => {
-    function updateSize() {
-      setSize([window.innerWidth, window.innerHeight]);
-    }
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-  return size;
-}
+// function useWindowSize() {
+//   const [size, setSize] = useState([0, 0]);
+//   useLayoutEffect(() => {
+//     function updateSize() {
+//       setSize([window.innerWidth, window.innerHeight]);
+//     }
+//     window.addEventListener("resize", updateSize);
+//     updateSize();
+//     return () => window.removeEventListener("resize", updateSize);
+//   }, []);
+//   return size;
+// }
 
-export default function Home() {
-  const size = useWindowSize();
+export default function CarouselPage() {
   const [sliderWidth, setSliderWidth] = useState(0);
 
   const ref: RefObject<HTMLDivElement | null> = useRef<null | HTMLDivElement>(null);
   useEffect(() => {
-    const _carouselSliderWidth = ref?.current?.getBoundingClientRect().width!;
-    console.log("Width of slider is: ", _carouselSliderWidth);
-    setSliderWidth(_carouselSliderWidth);
-  }, [ref])
+    const observer = new ResizeObserver(entries => {
+      setSliderWidth(entries[0].contentRect.width)
+    })
+    observer.observe(ref.current!)
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    }
+  }, [])
 
 
   const noOfItems = 10;
