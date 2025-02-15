@@ -70,11 +70,14 @@ export default function CarouselPage() {
     <div
       className={`${geistSans.variable} ${geistMono.variable} items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
     >
-      <div className="relative ">
-        <div className="flex flex-row gap-4  scroll-smooth overflow-y-hidden"
+      <div className="relative">
+
+        {/* Carousel Flex container*/}
+        <div className="flex flex-row gap-4  scroll-smooth overflow-hidden"
           style={{ gap: `${gapWidth}px` }}
           ref={ref}
         >
+          {/* Carousel List Items */}
           <div><CarouselSliderItem style={{ width: carouselSliderItemWidth }} /></div>
           <div><CarouselSliderItem style={{ width: carouselSliderItemWidth }} /></div>
           <div><CarouselSliderItem style={{ width: carouselSliderItemWidth }} /></div>
@@ -86,6 +89,8 @@ export default function CarouselPage() {
           <div><CarouselSliderItem style={{ width: carouselSliderItemWidth }} /></div>
           <div><CarouselSliderItem style={{ width: carouselSliderItemWidth }} /></div>
         </div>
+
+        {/* Left Button */}
         <div className="absolute left-0 top-0 h-[100%] flex items-center px-3 bg-gradient-to-l from-transparent to-white"
           style={{
             display: (itemAt <= 0) ? "none" : "flex"
@@ -98,7 +103,7 @@ export default function CarouselPage() {
           </div>
         </div>
 
-
+        {/* Right Button */}
         <div className="absolute right-0 top-0 h-[100%] flex items-center px-3 bg-gradient-to-r from-transparent to-white"
           style={{
             display: (itemAt >= noOfItems - itemsToShow) ? "none" : "flex"
