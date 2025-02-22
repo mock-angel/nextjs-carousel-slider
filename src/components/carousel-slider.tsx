@@ -4,7 +4,8 @@ import { RefObject, useEffect, useRef, useState } from "react";
 import { LeftArrowIcon } from "@/svgs/left-arrow"; // From here: https://github.com/mock-angel/nextjs-carousel-slider/blob/main/src/svgs/left-arrow.tsx
 import { RightArrowIcon } from "@/svgs/right-arrow"; // From here: https://github.com/mock-angel/nextjs-carousel-slider/blob/main/src/svgs/right-arrow.tsx
 
-export default function CarouselSlider() {
+export default function CarouselSlider(props: { itemsCount?: number, itemsToShow?: number, gapWidth?: number }) {
+
     const [sliderWidth, setSliderWidth] = useState(0);
 
     const ref: RefObject<HTMLDivElement | null> = useRef<null | HTMLDivElement>(null);
@@ -20,10 +21,10 @@ export default function CarouselSlider() {
             }
         }
     }, [])
-
-    const noOfItems = 10;
-    const itemsToShow = 4;
-    const gapWidth = 16;
+    const { itemsCount: noOfItems = 10,
+        itemsToShow = 4,
+        gapWidth = 16,
+    } = props;
 
     const gaps = itemsToShow - 1; // for 4 items we have 3 gaps
     const carouselItemWidth = (sliderWidth - (gaps * gapWidth)) / itemsToShow;
@@ -52,16 +53,9 @@ export default function CarouselSlider() {
                 ref={ref}
             >
                 {/* Carousel List Items */}
-                <CarouselItem style={{ width: carouselItemWidth }} />
-                <CarouselItem style={{ width: carouselItemWidth }} />
-                <CarouselItem style={{ width: carouselItemWidth }} />
-                <CarouselItem style={{ width: carouselItemWidth }} />
-                <CarouselItem style={{ width: carouselItemWidth }} />
-                <CarouselItem style={{ width: carouselItemWidth }} />
-                <CarouselItem style={{ width: carouselItemWidth }} />
-                <CarouselItem style={{ width: carouselItemWidth }} />
-                <CarouselItem style={{ width: carouselItemWidth }} />
-                <CarouselItem style={{ width: carouselItemWidth }} />
+                {Array.from({ length: noOfItems }).map((_, __) => ( // default 10 items are rendered, pass in your own items instead of specifying item count
+                    <CarouselItem style={{ width: carouselItemWidth }} />
+                ))}
             </div>
 
             {/* Left Button */}
