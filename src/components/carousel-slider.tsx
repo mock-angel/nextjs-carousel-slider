@@ -46,7 +46,7 @@ export default function CarouselSlider() {
         <div className="relative">
 
             {/* Carousel Flex container*/}
-            <div className="flex flex-row overflow-auto scroll-smooth "
+            <div className="flex flex-row overflow-hidden scroll-smooth "
                 style={{ gap: `${gapWidth}px` }}
                 ref={ref}
             >
