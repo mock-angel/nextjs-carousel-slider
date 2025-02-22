@@ -2,9 +2,9 @@ import { StarFavIcon } from "@/svgs/star-fav"
 import { ThreeDotsIcon } from "@/svgs/three-dots"
 import { CSSProperties } from "react"
 
-export const CarouselSliderItem = (props: { style: CSSProperties | undefined }) => {
+export const CarouselItem = (props: { style: CSSProperties | undefined }) => {
     return <>
-        <div className="border flex-1 p-4 rounded-xl" {...props}>
+        <div className="border p-4 rounded-xl flex-none" {...props}>
             <div className="h-[160px] bg-[#ffecec]  rounded-xl" />
             <div className="my-2">
                 Title in two lines just in case it's too long and we don't have space
