@@ -7,7 +7,7 @@ export const CarouselItem = (props: { style: CSSProperties | undefined }) => {
         <div className="border p-4 rounded-xl flex-none" {...props}>
             <div className="h-[160px] bg-[#ffecec]  rounded-xl" />
             <div className="my-2">
-                Title in two lines just in case it's too long and we don't have space
+                {"Title in two lines just in case it's too long and we don't have space"}
             </div>
 
             <div className="my-2 text-sm text-[#7b7b7b]">Document type</div>
