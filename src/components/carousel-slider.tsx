@@ -9,13 +9,14 @@ export default function CarouselSlider() {
 
     const ref: RefObject<HTMLDivElement | null> = useRef<null | HTMLDivElement>(null);
     useEffect(() => {
+        const refCurrent = ref.current;
         const observer = new ResizeObserver(entries => {
             setSliderWidth(entries[0].contentRect.width)
         })
-        observer.observe(ref.current!)
+        observer.observe(refCurrent!)
         return () => {
-            if (ref.current) {
-                observer.unobserve(ref.current);
+            if (refCurrent) {
+                observer.unobserve(refCurrent);
             }
         }
     }, [])
@@ -37,7 +38,7 @@ export default function CarouselSlider() {
         else {
             setItemAt(value => (value + scrollMultiplier));
         }
-        let _itemAt = itemAt + scrollMultiplier;
+        const _itemAt = itemAt + scrollMultiplier;
         const scrollAmount = (carouselItemWidth + gapWidth);
         ref.current?.scrollTo({ left: scrollAmount * _itemAt });
     }
