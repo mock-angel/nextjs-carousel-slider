@@ -4,27 +4,33 @@ import { RefObject, useEffect, useRef, useState } from "react";
 import { LeftArrowIcon } from "@/svgs/left-arrow"; // From here: https://github.com/mock-angel/nextjs-carousel-slider/blob/main/src/svgs/left-arrow.tsx
 import { RightArrowIcon } from "@/svgs/right-arrow"; // From here: https://github.com/mock-angel/nextjs-carousel-slider/blob/main/src/svgs/right-arrow.tsx
 
-export default function CarouselSlider(props: { itemsCount?: number, itemsToShow?: number, gapWidth?: number }) {
+interface CarouselProps {
+    itemsCount?: number;
+    itemsToShow?: number;
+    gapWidth?: number;
+}
+
+export default function CarouselSlider({
+    itemsCount = 10,
+    itemsToShow = 4,
+    gapWidth = 16,
+}: CarouselProps) {
 
     const [sliderWidth, setSliderWidth] = useState(0);
 
     const ref: RefObject<HTMLDivElement | null> = useRef<null | HTMLDivElement>(null);
     useEffect(() => {
-        const refCurrent = ref.current;
-        const observer = new ResizeObserver(entries => {
-            setSliderWidth(entries[0].contentRect.width)
-        })
-        observer.observe(refCurrent!)
-        return () => {
-            if (refCurrent) {
-                observer.unobserve(refCurrent);
-            }
-        }
+        if (!ref.current) return;
+
+        const observer = new ResizeObserver(([entry]) => {
+            setSliderWidth(entry.contentRect.width);
+        });
+
+        observer.observe(ref.current);
+
+        return () => observer.disconnect();
     }, [])
-    const { itemsCount: noOfItems = 10,
-        itemsToShow = 4,
-        gapWidth = 16,
-    } = props;
+
 
     const gaps = itemsToShow - 1; // for 4 items we have 3 gaps
     const carouselItemWidth = (sliderWidth - (gaps * gapWidth)) / itemsToShow;
@@ -35,7 +41,7 @@ export default function CarouselSlider(props: { itemsCount?: number, itemsToShow
         if (direction == "left") scrollMultiplier = -1;
         if (direction == "right") scrollMultiplier = 1;
 
-        if (itemAt + scrollMultiplier < 0 || itemAt + scrollMultiplier > itemAt + noOfItems) return;
+        if (itemAt + scrollMultiplier < 0 || itemAt + scrollMultiplier > itemAt + itemsCount) return;
         else {
             setItemAt(value => (value + scrollMultiplier));
         }
@@ -74,7 +80,7 @@ export default function CarouselSlider(props: { itemsCount?: number, itemsToShow
             {/* Right Button */}
             <div className="absolute right-0 top-0 h-[100%] flex items-center px-3 bg-gradient-to-r from-transparent to-white"
                 style={{
-                    display: (itemAt >= noOfItems - itemsToShow) ? "none" : "flex"
+                    display: (itemAt >= itemsCount - itemsToShow) ? "none" : "flex"
                 }}
             >
                 <div className="w-[25px] h-[25px]  flex items-center border rounded justify-items-center bg-[white] place-items-center cursor-pointer"
