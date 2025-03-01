@@ -36,19 +36,15 @@ export default function CarouselSlider({
     const carouselItemWidth = (sliderWidth - (gaps * gapWidth)) / itemsToShow;
 
     const [itemAt, setItemAt] = useState(0);
-    const onScroll = (direction: "left" | "right" | "none") => {
-        let scrollMultiplier = 0;
-        if (direction == "left") scrollMultiplier = -1;
-        if (direction == "right") scrollMultiplier = 1;
+    const onScroll = (direction: "left" | "right") => {
+        const scrollMultiplier = direction === "left" ? -1 : 1;
+        const newIndex = itemAt + scrollMultiplier;
 
-        if (itemAt + scrollMultiplier < 0 || itemAt + scrollMultiplier > itemAt + itemsCount) return;
-        else {
-            setItemAt(value => (value + scrollMultiplier));
-        }
-        const _itemAt = itemAt + scrollMultiplier;
-        const scrollAmount = (carouselItemWidth + gapWidth);
-        ref.current?.scrollTo({ left: scrollAmount * _itemAt });
-    }
+        if (newIndex < 0 || newIndex > itemsCount - itemsToShow) return;
+
+        setItemAt(newIndex);
+        ref.current?.scrollTo({ left: (carouselItemWidth + gapWidth) * newIndex, behavior: "smooth" });
+    };
 
     return (
         <div className="relative w-full">
