@@ -20,7 +20,7 @@ export default function CarouselPage() {
 
   return (
     <div
-      className={`${geistSans.variable} ${geistMono.variable} items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:px-5 font-[family-name:var(--font-geist-sans)]`}
+      className={`${geistSans.variable} ${geistMono.variable} items-center justify-items-center min-h-screen py-8 pb-20 gap-16 sm:px-5 font-[family-name:var(--font-geist-sans)] mx-[100px]`}
     >
 
 
