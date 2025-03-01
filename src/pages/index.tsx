@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import CarouselSlider from "@/components/carousel-slider";
 import { useState } from "react";
-import { Card, Slider, TextField, ThemeProvider, Typography } from "@mui/material";
+import { Card, Slider, Typography } from "@mui/material";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
