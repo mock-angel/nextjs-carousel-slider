@@ -53,8 +53,8 @@ export default function CarouselSlider(props: { itemsCount?: number, itemsToShow
                 ref={ref}
             >
                 {/* Carousel List Items */}
-                {Array.from({ length: 10 }).map((_, index) => ( // default 10 items are rendered, pass in your own items instead of specifying item count
-                    <CarouselItem key={index} style={{ width: carouselItemWidth }} />
+                {Array.from({ length: itemsCount }).map((_, __) => ( // default 10 items are rendered, pass in your own items instead of specifying item count
+                    <CarouselItem style={{ width: carouselItemWidth }} />
                 ))}
             </div>
 
