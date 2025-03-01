@@ -45,16 +45,16 @@ export default function CarouselSlider(props: { itemsCount?: number, itemsToShow
     }
 
     return (
-        <div className="relative">
+        <div className="relative w-full">
 
             {/* Carousel Flex container*/}
-            <div className="flex flex-row overflow-hidden scroll-smooth "
+            <div className="flex flex-row overflow-hidden scroll-smooth"
                 style={{ gap: `${gapWidth}px` }}
                 ref={ref}
             >
                 {/* Carousel List Items */}
-                {Array.from({ length: noOfItems }).map((_, __) => ( // default 10 items are rendered, pass in your own items instead of specifying item count
-                    <CarouselItem style={{ width: carouselItemWidth }} />
+                {Array.from({ length: 10 }).map((_, index) => ( // default 10 items are rendered, pass in your own items instead of specifying item count
+                    <CarouselItem key={index} style={{ width: carouselItemWidth }} />
                 ))}
             </div>
 
