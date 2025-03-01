@@ -19,6 +19,7 @@ export default function CarouselSlider({
     const [sliderWidth, setSliderWidth] = useState(0);
 
     const ref: RefObject<HTMLDivElement | null> = useRef<null | HTMLDivElement>(null);
+
     useEffect(() => {
         if (!ref.current) return;
 
