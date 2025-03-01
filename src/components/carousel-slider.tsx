@@ -61,30 +61,22 @@ export default function CarouselSlider({
             </div>
 
             {/* Left Button */}
-            <div className="absolute left-0 top-0 h-[100%] flex items-center px-3 bg-gradient-to-l from-transparent to-white"
-                style={{
-                    display: (itemAt <= 0) ? "none" : "flex"
-                }}
-            >
+            {itemAt > 0 && <div className="absolute left-0 top-0 h-[100%] flex items-center px-3 bg-gradient-to-l from-transparent to-white">
                 <div className="w-[25px] h-[25px]  flex items-center border rounded justify-items-center bg-[white] place-items-center cursor-pointer"
                     onClick={() => onScroll("left")}
                 >
                     <LeftArrowIcon style={{ width: "20px", height: "12px", flex: 1 }} />
                 </div>
-            </div>
+            </div>}
 
             {/* Right Button */}
-            <div className="absolute right-0 top-0 h-[100%] flex items-center px-3 bg-gradient-to-r from-transparent to-white"
-                style={{
-                    display: (itemAt >= itemsCount - itemsToShow) ? "none" : "flex"
-                }}
-            >
+            {(itemAt < itemsCount - itemsToShow) && <div className="absolute right-0 top-0 h-[100%] flex items-center px-3 bg-gradient-to-r from-transparent to-white">
                 <div className="w-[25px] h-[25px]  flex items-center border rounded justify-items-center bg-[white] place-items-center cursor-pointer"
                     onClick={() => onScroll("right")}
                 >
                     <RightArrowIcon style={{ width: "20px", height: "12px", flex: 1 }} />
                 </div>
-            </div>
+            </div>}
 
         </div>
     );
