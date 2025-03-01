@@ -1,4 +1,4 @@
-import { CarouselItem } from "@/components/carousel-slider-item";
+import { CarouselItem } from "@/components/carousel-item";
 import { RefObject, useEffect, useRef, useState } from "react";
 
 import { LeftArrowIcon } from "@/svgs/left-arrow"; // From here: https://github.com/mock-angel/nextjs-carousel-slider/blob/main/src/svgs/left-arrow.tsx
@@ -36,14 +36,14 @@ export default function CarouselSlider({
     const gaps = itemsToShow - 1; // for 4 items we have 3 gaps
     const carouselItemWidth = (sliderWidth - (gaps * gapWidth)) / itemsToShow;
 
-    const [itemAt, setItemAt] = useState(0);
+    const [scrollIndex, setScrollIndex] = useState(0);
     const onScroll = (direction: "left" | "right") => {
         const scrollMultiplier = direction === "left" ? -1 : 1;
-        const newIndex = itemAt + scrollMultiplier;
+        const newIndex = scrollIndex + scrollMultiplier;
 
         if (newIndex < 0 || newIndex > itemsCount - itemsToShow) return;
 
-        setItemAt(newIndex);
+        setScrollIndex(newIndex);
         ref.current?.scrollTo({ left: (carouselItemWidth + gapWidth) * newIndex, behavior: "smooth" });
     };
 
@@ -62,7 +62,7 @@ export default function CarouselSlider({
             </div>
 
             {/* Left Button */}
-            {itemAt > 0 && <div className="absolute left-0 top-0 h-[100%] flex items-center px-3 bg-gradient-to-l from-transparent to-white">
+            {scrollIndex > 0 && <div className="absolute left-0 top-0 h-[100%] flex items-center px-3 bg-gradient-to-l from-transparent to-white">
                 <div className="w-[25px] h-[25px]  flex items-center border rounded justify-items-center bg-[white] place-items-center cursor-pointer"
                     onClick={() => onScroll("left")}
                 >
@@ -71,7 +71,7 @@ export default function CarouselSlider({
             </div>}
 
             {/* Right Button */}
-            {(itemAt < itemsCount - itemsToShow) && <div className="absolute right-0 top-0 h-[100%] flex items-center px-3 bg-gradient-to-r from-transparent to-white">
+            {(scrollIndex < itemsCount - itemsToShow) && <div className="absolute right-0 top-0 h-[100%] flex items-center px-3 bg-gradient-to-r from-transparent to-white">
                 <div className="w-[25px] h-[25px]  flex items-center border rounded justify-items-center bg-[white] place-items-center cursor-pointer"
                     onClick={() => onScroll("right")}
                 >
